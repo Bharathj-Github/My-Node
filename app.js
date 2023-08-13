@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const port=process.env.PORT || 4000;
 
-app.use(cors({origin:"https://bharathj-github.github.io/My-Project/#/signup"}))
+app.use(cors())
 app.use(bodyparser.json());
 app.use('/',router);
 
