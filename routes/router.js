@@ -22,8 +22,14 @@ router.post("/register", (req, res) => {
     });
   res.json({ status: "successfully data added..." });
 });
-router.get("/register", (req, res) => {
-  res.json({ status: "success" });
+router.get("/api/registeredusers", async (req, res) => {
+  try{
+    let users = await model.find({"username": req.query.username});
+    res.json({ data: users });
+  }
+  catch(e){
+    console.log("ERROR :"+e)
+  }
 });
 
 module.exports = router;
