@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const model = require("../config/db/model");
+const cookie = require('cookie');
 
 exports.login = (req, res) => {
   const username = req.body.username;
   const user = { name: username };
 
   const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET,{expiresIn: "30s"});
-  console.log(accessToken);
-  req.headers.authorization = `Bearer ${accessToken}`;
+  res.cookie('jwt', `${accessToken}`,{expiresIn: '30s'});
   res.send({ accessToken });
 };
 exports.register = (req, res) => {
