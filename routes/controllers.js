@@ -6,9 +6,9 @@ exports.login = (req, res) => {
   const username = req.body.username;
   const user = { name: username };
 
-  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+  const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET,{expiresIn: "30s"});
   console.log(accessToken);
-  req.setHeader("Authorization", `Bearer ${accessToken}`);
+  req.headers.authorization = `Bearer ${accessToken}`;
   res.send({ accessToken });
 };
 exports.register = (req, res) => {

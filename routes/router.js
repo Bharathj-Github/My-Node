@@ -12,7 +12,7 @@ router.get("/login",controllers.login);
 router.get("/home",authenticateToken, controllers.home);
 
 function authenticateToken(req, res, next) {
-  const header = req.headers["Authorization"];
+  const header = req.headers.authorization;
   const token = header.split(' ')[1]
   console.log(token)
   if (token == null) return res.sendStatus(401);
