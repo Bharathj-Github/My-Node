@@ -8,7 +8,7 @@ exports.login = (req, res) => {
 
   const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
   console.log(accessToken);
-  res.setHeader("Authorization", `Bearer ${accessToken}`);
+  req.setHeader("Authorization", `Bearer ${accessToken}`);
   res.send({ accessToken });
 };
 exports.register = (req, res) => {
