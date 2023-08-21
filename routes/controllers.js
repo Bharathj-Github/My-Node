@@ -17,6 +17,11 @@ exports.login = async (req, res) => {
     if (!password) {
       res.status(206).json({ message: "Password Must Be Provided !" });
     } else {
+      if(!user){
+        res
+        .status(206)
+        .json({ message: "UserName And Password Doesn't Match !" });
+      }
       bcrypt.compare(password, user.password, (err, result) => {
         if (result) {
           const user_id = { userid: user._id };
