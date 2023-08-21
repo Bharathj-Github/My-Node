@@ -1,5 +1,5 @@
 const path = require("path");
-require("dotenv").config();
+require("dotenv").config({ path: path.join(__dirname, "../config/.env") });
 //{ path: path.join(__dirname, "../config/.env") }
 const express = require("express");
 const router = express.Router();
@@ -8,8 +8,7 @@ const jwt = require("jsonwebtoken");
 const cookie = require('cookie');
 
 router.post("/register", controllers.register);
-router.get("/api/registeredusers", controllers.registeredusers);
-router.get("/login",controllers.login);
+router.post("/login",controllers.login);
 router.get("/home",authenticateToken, controllers.home);
 
 function authenticateToken(req, res, next) {
