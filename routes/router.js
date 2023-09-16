@@ -1,23 +1,11 @@
 const path = require("path");
-require("dotenv").config({ path: path.join(__dirname, "../config/.env") });
+// require("dotenv").config({ path: path.join(__dirname, "../config/.env") });
 //{ path: path.join(__dirname, "../config/.env") }
 const express = require("express");
 const router = express.Router();
 const controllers = require('./controllers');
-const jwt = require("jsonwebtoken");
-const cookie = require('cookie');
 
 router.post("/register", controllers.register);
-router.post("/login",controllers.login);
-router.get("/home",authenticateToken, controllers.home);
+router.post("/login", controllers.login);
 
-function authenticateToken(req, res, next) {
-  const token = req.cookies['jwt']
-  if (token == null) return res.sendStatus(401);
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
-    next();
-  });
-}
 module.exports = router;
